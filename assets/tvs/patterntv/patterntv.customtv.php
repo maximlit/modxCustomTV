@@ -50,15 +50,11 @@ $patAll = explode($dlm, $patAll);
 $patAll = array_unique($patAll);
 
 if(!empty($patAll)){
-
-
 if (!function_exists('cleanExt')) {
     function cleanExt($a){
-        return  str_replace(".jpg","",$a);
-    
+        return  str_replace(".jpg","",$a);    
    }
  }
-    
 
     $patImgArr = array_map('cleanExt', $patImgArr);
     $patImgArr = array_diff($patImgArr,$patAll);
@@ -120,15 +116,12 @@ if(typeof setD != \'function\'){
     }
    }
 }
-
-
-   window.addD = function(el,id){
+window.addD = function(el,id){
     var addField = document.getElementById("tv"+id)
         ,dlm =  addField.value !== "" ? "||" : "";
     addField.value = addField.value + dlm + el.options[ el.selectedIndex ].text;
     el.removeChild(el[el.selectedIndex]);
-   }
-
+  }
 </script>';
 
 echo $output;
