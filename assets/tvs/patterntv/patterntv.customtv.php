@@ -19,7 +19,8 @@ $patPath = 'assets/images/pattern/';
 $path = MODX_BASE_PATH.$patPath;
 $patOpt ='';
 $base_url = $modx->config['base_url'];
-/*$tvName = $modx->getTemplateVar($field_id, 'name')['name'];*/
+$tvName = $modx->getTemplateVar($field_id, 'name');
+$tvName = $tvName['name'];
 
 $dlm = '||';
 
