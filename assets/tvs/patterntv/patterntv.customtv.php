@@ -138,15 +138,11 @@ if(typeof setD != \'function\'){
     }
    }
 }
-
-
    window.addD = function(el,id){
     var addField = document.getElementById("tv"+id)
         ,dlm =  addField.value !== "" ? "||" : "";
     addField.value = addField.value + dlm + el.options[ el.selectedIndex ].text;
     el.removeChild(el[el.selectedIndex]);
    }
-
 </script>';
-
 echo $output;
