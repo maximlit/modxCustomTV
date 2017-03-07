@@ -12,9 +12,6 @@ if (MODX_BASE_PATH == '') {
 
 global $modx;
 
-include_once(MODX_BASE_PATH . 'assets/lib/Helpers/FS.php');
-use Helpers\FS;
-
 $patPath = 'assets/images/pattern/';
 $path = MODX_BASE_PATH.$patPath;
 $patOpt ='';
@@ -30,7 +27,27 @@ if (!empty($field_value)){
     $curPat = true;
 }
 
-if(FS::getInstance()->checkDir($path)){
+if (!function_exists('checkDir')) {
+    function checkDir($path)
+    {
+        function relativePath($path, $owner = null)
+    {
+        if (is_null($owner)) {
+            $owner = MODX_BASE_PATH;
+        }
+        if (!(empty($path) || !is_scalar($path)) && !preg_match("/^http(s)?:\/\/\w+/", $path)) {
+            $path = trim(preg_replace("#^" . $owner . "#", '', $path), '/');
+        } else {
+            $path = '';
+        }
+        return $path;
+    }
+        $f = is_scalar($path) ? relativePath($path) : '';
+        return (!empty($f) && is_dir(MODX_BASE_PATH . $f) && is_readable(MODX_BASE_PATH . $f));
+    }
+ }
+
+if(checkDir($path)){
     $patImgArr = scandir(iconv("WINDOWS-1251","UTF-8",$path));
     $patImgArr = array_splice($patImgArr,2);
 }
